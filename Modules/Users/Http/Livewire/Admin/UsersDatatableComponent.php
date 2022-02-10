@@ -2,7 +2,6 @@
 
 namespace Modules\Users\Http\Livewire\Admin;
 
-
 use App\Http\Livewire\Admin\Datatable\WithBulkActions;
 use App\Http\Livewire\Admin\Datatable\WithCachedRows;
 use App\Http\Livewire\Admin\Datatable\WithPerPagePagination;
@@ -14,7 +13,11 @@ use Livewire\WithFileUploads;
 
 class UsersDatatableComponent extends Component
 {
-    use WithPerPagePagination, WithSorting, WithBulkActions, WithCachedRows, WithFileUploads;
+    use WithPerPagePagination;
+    use WithSorting;
+    use WithBulkActions;
+    use WithCachedRows;
+    use WithFileUploads;
 
     public $filters = [
         'search' => '',
@@ -41,9 +44,7 @@ class UsersDatatableComponent extends Component
 
     public function getRowsProperty()
     {
-        return $this->cache(function () {
-                return $this->applyPagination($this->rowsQuery);
-        });
+        return $this->cache(fn () => $this->applyPagination($this->rowsQuery));
     }
 
     public function render()

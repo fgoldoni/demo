@@ -12,6 +12,6 @@
 */
 
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
-    Route::get('/users', 'UsersController@index');
+Route::controller(UsersController::class)->middleware(['auth', 'verified'])->prefix('admin')->group(function () {
+    Route::get('/users', 'index');
 });
