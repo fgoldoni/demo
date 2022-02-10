@@ -1,0 +1,10 @@
+{
+    "Users": true,
+    "Companies": true,
+    "Jobs": true,
+    "Categories": true,
+    "Settings": true,
+    "Plans": true,
+    "Roles": true,
+    "Transactions": true
+}
