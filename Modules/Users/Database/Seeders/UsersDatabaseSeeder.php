@@ -17,8 +17,16 @@ class UsersDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        User::factory()->withPersonalTeam()->create(['email' => 'admin@admin.com']);
+        $user = User::factory()->withPersonalTeam()->create(['email' => 'admin@admin.com']);
+
+        $user->assignRole('Administrator');
 
         User::factory(50)->withPersonalTeam()->create();
+
+        $users = User::get();
+
+        foreach ($users as $user) {
+            $user->assignRole('User');
+        }
     }
 }

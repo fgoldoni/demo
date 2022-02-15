@@ -19,7 +19,9 @@ class UsersDatatableComponent extends Component
     use WithCachedRows;
     use WithFileUploads;
 
-    public $filters = [
+    public bool $showFilters = false;
+
+    public array $filters = [
         'search' => '',
         'status' => '',
         'amount-min' => null,
@@ -31,6 +33,18 @@ class UsersDatatableComponent extends Component
     public function save()
     {
         dd('ok');
+    }
+
+    public function toggleShowFilters()
+    {
+        $this->useCachedRows();
+
+        $this->showFilters = !$this->showFilters;
+    }
+
+    public function resetFilters()
+    {
+        $this->reset('filters');
     }
 
     public function getRowsQueryProperty()

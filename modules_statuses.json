@@ -6,5 +6,6 @@
     "Settings": true,
     "Plans": true,
     "Roles": true,
-    "Transactions": true
+    "Transactions": true,
+    "Dashboard": true
 }

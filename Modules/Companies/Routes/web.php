@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('companies')->group(function () {
-    Route::get('/', 'CompaniesController@index');
+Route::controller(CompaniesController::class)->middleware(['auth', 'verified', 'role:Administrator'])->prefix('admin')->group(function () {
+    Route::get('/companies', 'index')->name('admin.companies');
 });

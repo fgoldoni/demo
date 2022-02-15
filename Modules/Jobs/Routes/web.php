@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('jobs')->group(function () {
-    Route::get('/', 'JobsController@index');
+Route::controller(JobsController::class)->middleware(['auth', 'verified', 'role:Administrator'])->prefix('admin')->group(function () {
+    Route::get('/jobs', 'index')->name('admin.jobs');
 });

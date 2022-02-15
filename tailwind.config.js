@@ -19,6 +19,14 @@ module.exports = {
             ...colors,
             transparent: 'transparent',
             current: 'currentColor',
+            cool: 'D9E3E8',
+            cool: {
+                'primary': '#D9E3E8',
+                'secondary': '#ECF1F4',
+                'tertiary': '#f8fafc',
+                'base': '#19272F',
+                'muted': '#64748b',
+            },
         },
     },
 
