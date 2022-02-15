@@ -23,6 +23,7 @@
         </ul>
     </div>
     <div class="flex items-center space-x-4">
+        {{ $actions }}
         <div>
             {{ $perPage }}
         </div>
