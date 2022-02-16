@@ -21,6 +21,10 @@ class UsersDatabaseSeeder extends Seeder
 
         $user->assignRole('Administrator');
 
+        $user = User::factory()->withPersonalTeam()->create(['email' => 'fotsa.goldoni@yahoo.fr']);
+
+        $user->assignRole('User');
+
         User::factory(50)->withPersonalTeam()->create();
 
         $users = User::get();
