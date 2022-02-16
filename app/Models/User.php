@@ -12,7 +12,7 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -60,4 +60,18 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::updated(function ($subject) {
+            if (array_key_exists('email', $subject->getDirty())) {
+                $subject->email_verified_at = null;
+                if ($subject instanceof MustVerifyEmail) {
+                    $subject->sendEmailVerificationNotification();
+                }
+            }
+        });
+    }
 }
