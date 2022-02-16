@@ -123,7 +123,7 @@
                                     <div class="text-sm text-gray-500">Optimization</div>
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
+                                    @livewire('button.toggle', ['model' => $row, 'field' => 'email_verified_at'], key($row->id))
                                 </x-table.cell>
                                 <x-table.cell class="text-sm text-gray-500">
                                     @foreach ($row->roles as $role)
@@ -131,7 +131,7 @@
                                             <div class="absolute flex-shrink-0 flex items-center justify-center">
                                                 <span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
                                             </div>
-                                            <div class="ml-3.5 text-sm font-medium text-gray-900">{{ $role->name }}</div>
+                                            <div class="ml-3.5 text-sm font-medium text-gray-500">{{ $role->name }}</div>
                                         </a>
                                     @endforeach
                                 </x-table.cell>
