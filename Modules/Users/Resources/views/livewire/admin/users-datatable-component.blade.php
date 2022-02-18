@@ -129,7 +129,7 @@
                                     @foreach ($row->roles as $role)
                                         <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 m-1">
                                             <div class="absolute flex-shrink-0 flex items-center justify-center">
-                                                <span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
+                                                <span class="h-1.5 w-1.5 rounded-full bg-{{ config('settings.color') }}-500" aria-hidden="true"></span>
                                             </div>
                                             <div class="ml-3.5 text-sm font-medium text-gray-500">{{ $role->name }}</div>
                                         </a>

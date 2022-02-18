@@ -38,6 +38,7 @@ class SettingsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(MailConfigServiceProvider::class);
     }
 
     /**
