@@ -29,11 +29,11 @@ class SettingsDatabaseSeeder extends Seeder
         Setting::factory()->create(['name' => 'email', 'value' => 'email']);
 
         Setting::factory()->create(['name' => 'mail_driver', 'value' => 'smtp']);
-        Setting::factory()->create(['name' => 'mail_host', 'value' => 'smtp.mailtrap.io']);
-        Setting::factory()->create(['name' => 'mail_port', 'value' => '2525']);
-        Setting::factory()->create(['name' => 'mail_encryption', 'value' => null]);
-        Setting::factory()->create(['name' => 'mail_username', 'value' => null]);
-        Setting::factory()->create(['name' => 'mail_password', 'value' => null]);
+        Setting::factory()->create(['name' => 'mail_host', 'value' => 'mail.gandi.net']);
+        Setting::factory()->create(['name' => 'mail_port', 'value' => '25']);
+        Setting::factory()->create(['name' => 'mail_encryption', 'value' => 'yes']);
+        Setting::factory()->create(['name' => 'mail_username', 'value' => 'contact@demogoldoni.com']);
+        Setting::factory()->create(['name' => 'mail_password', 'value' => 'contact@demogoldoni.com']);
 
         Setting::factory()->create(['name' => 'mail_from', 'value' => 'service@jobhunt.com']);
         Setting::factory()->create(['name' => 'mail_name', 'value' => 'Job Hunt']);
