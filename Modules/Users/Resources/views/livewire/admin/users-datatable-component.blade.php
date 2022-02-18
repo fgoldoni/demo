@@ -96,6 +96,9 @@
                 </div>
                 <x-table>
                     <x-slot name="head">
+                        <x-table.heading class="pr-0 w-8">
+                            <x-input.checkbox wire:model="selectPage" />
+                        </x-table.heading>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -105,8 +108,26 @@
                         </th>
                     </x-slot>
                     <x-slot name="body">
+                        @if ($selectPage)
+                            <x-table.row class="bg-gray-200" wire:key="row-message">
+                                <x-table.cell colspan="6">
+                                    @unless ($selectAll)
+                                        <div>
+                                            <span>You have selected <strong>{{ $rows->count() }}</strong> items, do you want to select all <strong>{{ $rows->total() }}</strong>?</span>
+                                            <x-button.link wire:click="selectAll" class="ml-1 text-blue-600">Select All</x-button.link>
+                                        </div>
+                                    @else
+                                        <span>You are currently selecting all <strong>{{ $rows->total() }}</strong> items.</span>
+                                    @endif
+                                </x-table.cell>
+                            </x-table.row>
+                        @endif
+
                         @forelse ($rows as $row)
                             <x-table.row>
+                                <x-table.cell class="pr-0">
+                                    <x-input.checkbox wire:model="selected" value="{{ $row->id }}" />
+                                </x-table.cell>
                                 <x-table.cell>
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
