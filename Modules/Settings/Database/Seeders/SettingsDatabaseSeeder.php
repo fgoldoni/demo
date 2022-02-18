@@ -35,9 +35,9 @@ class SettingsDatabaseSeeder extends Seeder
         Setting::factory()->create(['name' => 'mail_username', 'value' => 'contact@demogoldoni.com']);
         Setting::factory()->create(['name' => 'mail_password', 'value' => 'contact@demogoldoni.com']);
 
-        Setting::factory()->create(['name' => 'mail_from', 'value' => 'service@jobhunt.com']);
-        Setting::factory()->create(['name' => 'mail_name', 'value' => 'Job Hunt']);
-        Setting::factory()->create(['name' => 'mail_reply_to', 'value' => 'reply@jobhunt.com']);
+        Setting::factory()->create(['name' => 'mail_from', 'value' => 'contact@demogoldoni.com']);
+        Setting::factory()->create(['name' => 'mail_name', 'value' => 'Job Hot']);
+        Setting::factory()->create(['name' => 'mail_reply_to', 'value' => 'contact@demogoldoni.com']);
 
         Setting::factory()->create(['name' => 'sendmail_path', 'value' => '/usr/sbin/sendmail -t -i']);
         Setting::factory()->create(['name' => 'log_channel', 'value' => null]);
