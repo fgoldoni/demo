@@ -68,7 +68,6 @@ class User extends Authenticatable implements MustVerifyEmail
         self::updated(function ($subject) {
             if (array_key_exists('email', $subject->getDirty())) {
                 $subject->email_verified_at = null;
-                $subject->save();
 
                 if ($subject instanceof MustVerifyEmail) {
                     $subject->sendEmailVerificationNotification();
