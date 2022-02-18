@@ -16,7 +16,7 @@ class MailConfigServiceProvider extends ServiceProvider
                 return $setting->pluck('value', 'name')->all();
             });
 
-            $cache->forget('settings');
+            // $cache->forget('settings');
 
             config()->set('settings', $settings);
         }

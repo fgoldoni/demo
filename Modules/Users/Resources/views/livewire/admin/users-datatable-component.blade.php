@@ -113,7 +113,7 @@
                                             <img class="h-10 w-10 rounded-full" src="{{ $row->profile_photo_url }}" alt="">
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">{{ $row->name }}r</div>
+                                            <div class="text-sm font-medium text-gray-900">{{ $row->name }}</div>
                                             <div class="text-sm text-gray-500">{{ $row->email }}</div>
                                         </div>
                                     </div>
@@ -129,14 +129,62 @@
                                     @foreach ($row->roles as $role)
                                         <a href="#" class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 m-1">
                                             <div class="absolute flex-shrink-0 flex items-center justify-center">
-                                                <span class="h-1.5 w-1.5 rounded-full bg-{{ config('settings.color') }}-500" aria-hidden="true"></span>
+                                                <span class="h-1.5 w-1.5 rounded-full bg-indigo-500" aria-hidden="true"></span>
                                             </div>
                                             <div class="ml-3.5 text-sm font-medium text-gray-500">{{ $role->name }}</div>
                                         </a>
                                     @endforeach
                                 </x-table.cell>
                                 <x-table.cell class="text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <x-jet-dropdown align="right" width="w-30">
+                                        <x-slot name="trigger">
+                                            <button type="button" class="bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                                                <span class="sr-only">Open options</span>
+                                                <!-- Heroicon name: solid/dots-vertical -->
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                                                </svg>
+                                            </button>
+                                        </x-slot>
+
+                                        <x-slot name="content">
+                                            <x-jet-dropdown-link wire:click="edit({{ $row->id }})" class="group flex items-center cursor-pointer">
+                                                <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                    <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+                                                </svg>
+                                                Edit
+                                            </x-jet-dropdown-link>
+
+                                            <x-jet-dropdown-link href="{{ route('profile.show') }}" class="group flex items-center">
+                                                <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                Archive
+                                            </x-jet-dropdown-link>
+
+
+                                            <x-jet-dropdown-link href="{{ route('profile.show') }}" class="group flex items-center">
+                                                <!-- Heroicon name: solid/user-add -->
+                                                <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                                                </svg>
+                                                Share
+                                            </x-jet-dropdown-link>
+
+                                            <div class="border-t border-gray-100"></div>
+
+                                            <!-- Authentication -->
+                                            <x-jet-dropdown-link href="{{ route('profile.show') }}" class="group flex items-center">
+                                                <!-- Heroicon name: solid/trash -->
+                                                <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                Delete
+                                            </x-jet-dropdown-link>
+                                        </x-slot>
+                                    </x-jet-dropdown>
                                 </x-table.cell>
                             </x-table.row>
                         @empty
@@ -149,4 +197,6 @@
             </div>
         </div>
     </div>
+
+    @include('users::admin.save-user-modal')
 </div>

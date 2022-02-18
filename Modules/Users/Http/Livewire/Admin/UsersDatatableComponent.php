@@ -19,7 +19,13 @@ class UsersDatatableComponent extends Component
     use WithCachedRows;
     use WithFileUploads;
 
+    public bool $showDeleteModal = false;
+
+    public bool $showEditModal = false;
+
     public bool $showFilters = false;
+
+    public $avatar = null;
 
     public array $filters = [
         'search' => '',
@@ -30,9 +36,20 @@ class UsersDatatableComponent extends Component
         'date-max' => null,
     ];
 
-    public function save()
+    public User $editing;
+
+    public function rules()
     {
-        dd('ok');
+        return [
+            'editing.name' => 'required|min:3',
+            'editing.email' => 'required|max:255|unique:users,email,' . $this->editing->id,
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:1000',
+        ];
+    }
+
+    public function mount()
+    {
+        $this->editing = $this->makeBlankUser();
     }
 
     public function toggleShowFilters()
@@ -45,6 +62,34 @@ class UsersDatatableComponent extends Component
     public function resetFilters()
     {
         $this->reset('filters');
+    }
+
+    public function create()
+    {
+        $this->useCachedRows();
+
+        if ($this->editing->getKey()) {
+            $this->editing = $this->makeBlankUser();
+        }
+
+        $this->showEditModal = true;
+    }
+
+
+
+    public function save()
+    {
+        $this->validate();
+
+        $this->editing->save();
+
+        if (isset($this->avatar)) {
+            $this->editing->updateProfilePhoto($this->avatar);
+        }
+
+        $this->showEditModal = false;
+
+        $this->notify('The user has been successfully updated');
     }
 
     public function getRowsQueryProperty()
@@ -61,9 +106,26 @@ class UsersDatatableComponent extends Component
         return $this->cache(fn () => $this->applyPagination($this->rowsQuery));
     }
 
+    public function edit(User $user)
+    {
+        $this->useCachedRows();
+
+        if ($this->editing->isNot($user)) {
+            $this->editing = $user->load('roles:id,name');
+            $this->avatar = null;
+        }
+
+        $this->showEditModal = true;
+    }
+
     public function render()
     {
         return view('users::livewire.admin.users-datatable-component', ['rows' => $this->rows])
             ->extends('layouts.admin', ['title' => 'Users List']);
+    }
+
+    private function makeBlankUser()
+    {
+        return User::make();
     }
 }
