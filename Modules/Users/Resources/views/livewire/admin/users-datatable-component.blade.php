@@ -1,7 +1,7 @@
 <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg shadow-lg">
+            <div class="overflow-hidden">
                 <x-toolbar>
                     <x-slot name="search">
                         <x-toolbar.search wire:model="filters.search" placeholder="Search Items ..."></x-toolbar.search>
@@ -9,7 +9,7 @@
 
                     <x-slot name="advancedSearch">
                         <x-tertiary-button wire:click="toggleShowFilters" class="hidden lg:flex">@if ($showFilters) Hide @endif Advanced Search ...</x-tertiary-button>
-                        <a href="#" class="hover:text-gray-400 flex lg:hidden">
+                        <a href="javascript:;" wire:click="toggleShowFilters" class="text-gray-400 hover:text-gray-500 flex lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                             </svg>
@@ -45,7 +45,7 @@
                     </x-slot>
 
                     <x-slot name="perPage">
-                        <x-input.select wire:model="perPage" id="perPage" class="bg-gray-50">
+                        <x-input.select wire:model="perPage" id="perPage" class="bg-white">
                             <option value="5">5</option>
                             <option value="10">10</option>
                             <option value="25">25</option>

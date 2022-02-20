@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-cool-primary">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-100">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,17 +11,17 @@
             <title>{{ config('app.name') }}</title>
         @endif
 
-    <!-- Fonts -->
+       <!-- Fonts -->
         <link href="https://fonts.cdnfonts.com/css/operator-mono" rel="stylesheet">
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
         @livewireStyles
+        <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ url(mix('js/app.js')) }}" defer></script>
     </head>
     <body class="h-full font-sans antialiased">
         <x-jet-banner />
@@ -42,5 +42,7 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="https://unpkg.com/moment"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     </body>
 </html>
