@@ -209,6 +209,14 @@
                                 </x-table.cell>
                             </x-table.row>
                         @empty
+                            <x-table.row>
+                                <x-table.cell colspan="6">
+                                    <div class="flex justify-center items-center space-x-2">
+                                        <x-icon.inbox class="h-8 w-8 text-gray-400" />
+                                        <span class="font-medium py-8 text-gray-400 text-xl">No items found...</span>
+                                    </div>
+                                </x-table.cell>
+                            </x-table.row>
                         @endforelse
                     </x-slot>
                 </x-table>

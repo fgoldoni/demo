@@ -95,6 +95,8 @@ class UsersDatatableComponent extends Component
     public function getRowsQueryProperty()
     {
         $query = User::query()
+            ->with(['roles:id,name'])
+            ->search($this->filters['search'])
             ->when($this->filters['date-min'], fn ($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
             ->when($this->filters['date-max'], fn ($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)));
 
