@@ -49,6 +49,12 @@
                         {{ __('Manage Account') }}
                     </div>
 
+                    @impersonating($guard = null)
+                        <x-jet-dropdown-link href="{{ route('impersonate.leave') }}">
+                            {{ __('Leave impersonation') }}
+                        </x-jet-dropdown-link>
+                    @endImpersonating
+
                     <x-jet-dropdown-link href="{{ route('profile.show') }}">
                         {{ __('Profile') }}
                     </x-jet-dropdown-link>
