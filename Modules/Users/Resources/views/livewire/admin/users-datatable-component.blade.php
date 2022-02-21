@@ -111,6 +111,9 @@
                         <x-table.heading sortable multiColumn wire:click="sortBy('status')"
                                          :direction="$sorts['status'] ?? null">Role
                         </x-table.heading>
+                        <x-table.heading sortable multiColumn wire:click="sortBy('created_at')"
+                                         :direction="$sorts['created_at'] ?? null">created at
+                        </x-table.heading>
                         <x-table.heading/>
                     </x-slot>
                     <x-slot name="body">
@@ -135,6 +138,9 @@
                                     <x-input.checkbox wire:model="selected" value="{{ $row->id }}" />
                                 </x-table.cell>
                                 <x-table.cell>
+                                    <x-button.link wire:click="edit({{ $row->id }})">{{ $row->id }}</x-button.link>
+                                </x-table.cell>
+                                <x-table.cell>
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             <img class="h-10 w-10 rounded-full" src="{{ $row->profile_photo_url }}" alt="">
@@ -144,10 +150,6 @@
                                             <div class="text-sm text-gray-500">{{ $row->email }}</div>
                                         </div>
                                     </div>
-                                </x-table.cell>
-                                <x-table.cell>
-                                    <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                    <div class="text-sm text-gray-500">Optimization</div>
                                 </x-table.cell>
                                 <x-table.cell>
                                     @livewire('button.toggle', ['model' => $row, 'field' => 'email_verified_at'], key($row->id))
@@ -161,6 +163,10 @@
                                             <div class="ml-3.5 text-sm font-medium text-gray-500">{{ $role->name }}</div>
                                         </a>
                                     @endforeach
+                                </x-table.cell>
+                                <x-table.cell>
+                                    <span class="text-gray-500 text-md truncate">{{ $row->created_at->format('d M Y H:m') }}
+                                    </span>
                                 </x-table.cell>
                                 <x-table.cell class="text-right text-sm font-medium">
                                     <x-jet-dropdown align="right" width="w-30">
