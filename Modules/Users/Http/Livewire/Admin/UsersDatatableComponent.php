@@ -27,6 +27,8 @@ class UsersDatatableComponent extends Component
 
     public $avatar = null;
 
+    protected $queryString = ['sorts'];
+
     public array $filters = [
         'search' => '',
         'status' => '',
@@ -37,6 +39,8 @@ class UsersDatatableComponent extends Component
     ];
 
     public User $editing;
+
+    protected $listeners = ['refreshUsers' => '$refresh'];
 
     public function rules()
     {
@@ -62,6 +66,7 @@ class UsersDatatableComponent extends Component
     public function resetFilters()
     {
         $this->reset('filters');
+        $this->resetPage();
     }
 
     public function create()
@@ -92,11 +97,32 @@ class UsersDatatableComponent extends Component
         $this->notify('The user has been successfully updated');
     }
 
+    public function exportSelected()
+    {
+        return response()->streamDownload(
+            function () {
+                echo $this->selectedRowsQuery->toCsv();
+            },
+            'users.csv'
+        );
+    }
+
+    public function deleteSelected()
+    {
+        $deleteCount = $this->selectedRowsQuery->count();
+
+        $this->selectedRowsQuery->delete();
+
+        $this->showDeleteModal = false;
+
+        $this->notify('You\'ve deleted ' . $deleteCount . ' users');
+    }
+
     public function getRowsQueryProperty()
     {
         $query = User::query()
             ->with(['roles:id,name'])
-            ->search($this->filters['search'])
+            ->when($this->filters['search'], fn ($query, $search) => $query->search($search))
             ->when($this->filters['date-min'], fn ($query, $date) => $query->where('created_at', '>=', Carbon::parse($date)))
             ->when($this->filters['date-max'], fn ($query, $date) => $query->where('created_at', '<=', Carbon::parse($date)));
 
@@ -128,6 +154,6 @@ class UsersDatatableComponent extends Component
 
     private function makeBlankUser()
     {
-        return User::make();
+        return User::make(['password' => bcrypt('00000000')]);
     }
 }

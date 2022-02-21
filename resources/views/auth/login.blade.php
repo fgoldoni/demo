@@ -19,14 +19,14 @@
                     <h3 class="text-xl text-gray-700 font-bold mb-6">
                         Login <span class="text-gray-400 font-light">to your account</span></h3>
 
-                    <input id="email" type="email" class="px-3 w-full py-2 bg-gray-200 border border-gray-200 rounded focus:border-gray-400 focus:outline-none focus:bg-white mb-4 {{ $errors->has('email') ? ' border-red-500' : '' }}" placeholder="Email" name="email" :value="old('email')" required autofocus>
+                    <input id="email" type="email" class="px-3 w-full py-2 bg-gray-200 border border-gray-200 rounded focus:border-gray-400 focus:outline-none focus:bg-white mb-4 {{ $errors->has('email') ? ' border-red-500' : '' }}" placeholder="Email" name="email" value="admin@admin.com" required autofocus>
                     @if ($errors->has('email'))
                         <p class="text-red-500 text-xs italic mt-4">
                             {{ $errors->first('email') }}
                         </p>
                     @endif
 
-                    <input id="password" type="password" class="px-3 w-full py-2 bg-gray-200 border border-gray-200 rounded focus:border-gray-400 focus:outline-none focus:bg-white mb-4 {{ $errors->has('password') ? ' border-red-500' : '' }}" name="password" required autocomplete="current-password" placeholder="Password">
+                    <input id="password" type="password" class="px-3 w-full py-2 bg-gray-200 border border-gray-200 rounded focus:border-gray-400 focus:outline-none focus:bg-white mb-4 {{ $errors->has('password') ? ' border-red-500' : '' }}" name="password" value="00000000" required autocomplete="current-password" placeholder="Password">
 
                     <div class="flex flex-wrap items-center">
                         <div class="w-full sm:flex-1">

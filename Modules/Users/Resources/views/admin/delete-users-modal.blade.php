@@ -8,9 +8,13 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:click="$set('showDeleteModal', false)">Cancel</x-jet-secondary-button>
+            <x-jet-secondary-button wire:click="$set('showDeleteModal', false)" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
 
-            <x-jet-button type="submit">Delete</x-jet-button>
+            <x-jet-button class="ml-3" wire:loading.attr="disabled">
+                {{ __('Save') }}
+            </x-jet-button>
         </x-slot>
     </x-jet-confirmation-modal>
 </form>
