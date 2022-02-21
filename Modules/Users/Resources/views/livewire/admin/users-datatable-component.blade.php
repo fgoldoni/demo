@@ -108,9 +108,7 @@
                         <x-table.heading sortable multiColumn wire:click="sortBy('email_verified_at')"
                                          :direction="$sorts['email_verified_at'] ?? null">Status
                         </x-table.heading>
-                        <x-table.heading sortable multiColumn wire:click="sortBy('status')"
-                                         :direction="$sorts['status'] ?? null">Role
-                        </x-table.heading>
+                        <x-table.heading class="text-left">Role</x-table.heading>
                         <x-table.heading sortable multiColumn wire:click="sortBy('created_at')"
                                          :direction="$sorts['created_at'] ?? null">created at
                         </x-table.heading>
